@@ -1,8 +1,8 @@
 # Grafana Cloud Setup
 
 - Goals
-  - Forward logs to Grafana Cloud via Fluent Bit
   - Forward Prometheus metrics to Grafana Cloud
+  - Forward logs to Grafana Cloud via Fluent Bit
   - Import Dashboards into Grafana Cloud
 
 ## Verify CSE-Labs access
@@ -16,11 +16,19 @@
 
 - Go to <https://grafana.com> and create a free account
 
+- Save your Grafana Cloud user name to env var
+
+  ```bash
+
+  export GC_USER=yourUserName
+
+  ```
+
 - Click on `My Account`
   - You will get redirected to this URL <https://grafana.com/orgs/yourAccountNameHere>
 - In the left nav bar, click on `API Keys` (under Security)
 - Click on `+ Add API Key'
-  - Name your API Key (i.e. bartr-publisher)
+  - Name your API Key (i.e. yourName-publisher)
   - Select `MetricsPublisher` as the role
   - Click on `Create API Key`
   - Click on `Copy to Clipboard` and save wherever you save your PATs
@@ -74,7 +82,7 @@ cd grafana-cloud
 
 - Set Prometheus values
   - From the `Grafana Cloud Portal`
-    - <https://grafana.com/orgs/yourUserId>
+    - <https://grafana.com/orgs/${GC_USER}>
   - Click `Details` in the `Prometheus` section
     - Copy your `Remote Write Endpoint` value
       - Export the value
@@ -96,7 +104,7 @@ cd grafana-cloud
 
 - Set Loki Tenant ID
   - From the `Grafana Cloud Portal`
-    - <https://grafana.com/orgs/yourUserId>
+    - <https://grafana.com/orgs/${GC_USER}>
   - Click `Details` in the `Loki` section
     - Copy your `User` value
     - Export the value
@@ -123,6 +131,7 @@ cd grafana-cloud
   GC_LOKI_USER=######
   GC_PROM_URL=https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
   GC_PROM_USER=######
+  GC_USER=bartr
 
   ```
 

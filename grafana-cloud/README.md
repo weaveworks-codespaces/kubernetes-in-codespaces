@@ -122,7 +122,43 @@ cd grafana-cloud
 
   ```
 
-- Deploy Fluent Bit
+## Deploy Prometheus
+
+```bash
+
+envsubst < prometheus.yaml | kubectl apply -f -
+
+# check pod
+kubectl get pods -n monitoring
+
+# check logs
+kubectl logs -n monitoring
+
+```
+
+## Validate Prometheus Metrics
+
+- Open your Grafana Cloud dashboard
+  - Make sure to replace yourUser
+    - <https://yourUser.grafana.net>
+- Select the `Explore` tab from the left navigation menu
+- Select Prometheus data from the `Explore` drop down at top left of panel
+- Enter `NgsaAppDuration_bucket` in the `PromQL Query`
+- Click `Run Query` or press `ctl + enter`
+
+## Import Dashboards
+
+- Edit `dotnet.json` and `ngsa.json`
+  - Replace `datasource` with correct data source
+
+- From Grafana Dashboard
+  - Click + and select Import
+  - Copy the dotnet.json text
+  - Paste in `Import via panel json`
+  - Click `Load`
+  - Repeat for `ngsa.json`
+
+## Deploy Fluent Bit
 
   ```bash
 

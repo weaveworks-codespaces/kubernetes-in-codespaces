@@ -59,7 +59,10 @@ make create
 kubectl apply -f deploy/ngsa-memory
 kubectl apply -f deploy/webv
 
-# check your pods
+# create the monitoring namespace
+kubectl apply -f grafana-cloud/namespace.yaml
+
+# wit for pods to start
 kubectl get pods -A
 
 # change to the grafana-cloud directory
@@ -69,11 +72,23 @@ cd grafana-cloud
 
 ## Set Environment Variables
 
-- Verify GC_PAT is set
+- Set Prometheus values
+  - From the `Grafana Cloud Portal`
+    - <https://grafana.com/orgs/yourUserId>
+  - Click `Details` in the `Prometheus` section
+    - Copy your `Remote Write Endpoint` value
+      - Export the value
 
-  ```bash
-  echo $GC_PAT
-  ```
+      ```bash
+      export GC_PROM_URL=pasteValue
+      ```
+
+    - Copy your `User` value
+      - Export the value
+
+      ```bash
+      export GC_PROM_USER=pasteValue
+      ```
 
 - Set Loki Tenant ID
   - From the `Grafana Cloud Portal`
@@ -83,8 +98,29 @@ cd grafana-cloud
     - Export the value
 
     ```bash
+
     export GC_LOKI_USER=pasteValue
+
     ```
+
+- Verify GC_* env vars are set
+
+  ```bash
+
+  env | grep GC_
+
+  ```
+
+  - Ouput should look like this
+
+  ```text
+
+  GC_PAT=xxxxxxxxxxxxxx==
+  GC_LOKI_USER=######
+  GC_PROM_URL=https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push
+  GC_PROM_USER=######
+
+  ```
 
 - Deploy Fluent Bit
 

@@ -73,7 +73,7 @@ data:
       scrape_interval: 5s
       evaluation_interval: 5s
     remote_write:
-    - url: ${GC_PROM_URL}/api/prom/push
+    - url: $GC_PROM_URL
       basic_auth:
         username: $GC_PROM_USER
         password: eyJrIjoiN2U3YzRjYWVkNDU1MWEwOWM1OGRmZjUyNjRmNjAwNTk4YzJiNjNkNiIsIm4iOiJiYXJ0ci1wdWJsaXNoZXIiLCJpZCI6NTU4MzY3fQ==

@@ -53,17 +53,70 @@
 ```bash
 
 # create k3d cluster
-make all
+make create
 
-# delete fluent bit and prometheus
-# we will deploy new versions of these
-kubectl delete -f deploy/fluentbit
-kubectl delete -f deploy/prometheus
+# deploy ngsa-app and webv
+kubectl apply -f deploy/ngsa-memory
+kubectl apply -f deploy/webv
 
 # check your pods
 kubectl get pods -A
 
 # change to the grafana-cloud directory
 cd grafana-cloud
+
+```
+
+## Set Environment Variables
+
+- Verify GC_PAT is set
+
+  ```bash
+  echo $GC_PAT
+  ```
+
+- Set Loki Tenant ID
+  - From the `Grafana Cloud Portal`
+    - <https://grafana.com/orgs/yourUserId>
+  - Click `Details` in the `Loki` section
+    - Copy your `User` value
+    - Export the value
+
+    ```bash
+    export GC_LOKI_USER=pasteValue
+    ```
+
+- Deploy Fluent Bit
+
+  ```bash
+
+    kubectl apply -f fluentbit/account.yaml
+    kubectl apply -f fluentbit/log.yaml
+
+    # replace the credentials
+    envsubst < fluentbit/gcloud-config.yaml | kubectl apply -f -
+
+    kubectl apply -f fluentbit/fluentbit-pod.yaml
+
+    # check pod
+    kubectl get pods -n logging
+
+    # check logs
+    kubectl logs -n logging fluentbit
+
+  ```
+
+## Setup Prometheus
+
+```bash
+
+# change yourUserId
+export GC_PROM_USER=yourUserId
+
+# you may need to change this URL
+export GC_PROM_URL=https://prometheus-prod-10-prod-us-central-0.grafana.net
+
+# create Prometheus
+envsubst < prometheus.yaml | kubectl apply -f -
 
 ```

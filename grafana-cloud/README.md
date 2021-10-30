@@ -135,6 +135,19 @@ cd grafana-cloud
 
   ```
 
+- Save values for future use (optional)
+
+  ```bash
+
+  echo "export GC_LOKI_USER=$GC_LOKI_USER" > ~/grafanacloud.env
+  echo "export GC_PROM_URL=$GC_PROM_URL" >> ~/grafanacloud.env
+  echo "export GC_PROM_USER=$GC_PROM_USER" >> ~/grafanacloud.env
+  echo "export GC_USER=$GC_USER" >> ~/grafanacloud.env
+
+  cat ~/grafanacloud.env
+
+  ```
+
 ## Deploy Prometheus
 
 ```bash
@@ -190,12 +203,12 @@ kubectl logs -n monitoring -l app="prometheus-server"
 - Edit `dotnet.json` and `ngsa.json`
   - Replace `datasource` with correct data source
 
-  ```bash
+    ```bash
 
-  envsubst '$GC_USER' < dotnet.templ > dotnet.json
-  envsubst '$GC_USER' < ngsa.templ > ngsa.json
+    envsubst '$GC_USER' < dotnet.templ > dotnet.json
+    envsubst '$GC_USER' < ngsa.templ > ngsa.json
 
-  ```
+    ```
 
 - From Grafana Dashboard
   - Click + and select Import

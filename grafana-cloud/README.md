@@ -82,7 +82,7 @@ cd grafana-cloud
 
 - Set Prometheus values
   - From the `Grafana Cloud Portal`
-    - <https://grafana.com/orgs/${GC_USER}>
+    - <https://grafana.com/orgs/yourUser>
   - Click `Details` in the `Prometheus` section
     - Copy your `Remote Write Endpoint` value
       - Export the value
@@ -104,7 +104,7 @@ cd grafana-cloud
 
 - Set Loki Tenant ID
   - From the `Grafana Cloud Portal`
-    - <https://grafana.com/orgs/${GC_USER}>
+    - <https://grafana.com/orgs/yourUser>
   - Click `Details` in the `Loki` section
     - Copy your `User` value
     - Export the value
@@ -167,7 +167,7 @@ kubectl logs -n monitoring -l app="prometheus-server"
 
 - Open your Grafana Cloud dashboard
   - Make sure to replace yourUser
-    - <https://${GC_USER}.grafana.net>
+    - <https://yourUser.grafana.net>
 - Select the `Explore` tab from the left navigation menu
 - Select Prometheus data from the `Explore` drop down at top left of panel
 - Enter `NgsaAppDuration_bucket` in the `PromQL Query`
@@ -192,7 +192,7 @@ kubectl logs -n monitoring -l app="prometheus-server"
 
 - Open your Grafana Cloud dashboard
   - Make sure to replace yourUser
-    - <https://${GC_USER}.grafana.net>
+    - <https://yourUser.grafana.net>
 - Select the `Explore` tab from the left navigation menu
 - Select Logs data from the `Explore` drop down at top left of panel
 - Enter `{ job = "ngsa" }` in the `Loki Query`

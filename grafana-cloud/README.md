@@ -139,6 +139,7 @@ cd grafana-cloud
 
 ```bash
 
+# substitue the env vars and apply the yaml
 envsubst < prometheus.yaml | kubectl apply -f -
 
 # check pod
@@ -153,7 +154,7 @@ kubectl logs -n monitoring -l app="prometheus-server"
 
 - Open your Grafana Cloud dashboard
   - Make sure to replace yourUser
-    - <https://yourUser.grafana.net>
+    - <https://${GC_USER}.grafana.net>
 - Select the `Explore` tab from the left navigation menu
 - Select Prometheus data from the `Explore` drop down at top left of panel
 - Enter `NgsaAppDuration_bucket` in the `PromQL Query`
@@ -178,7 +179,7 @@ kubectl logs -n monitoring -l app="prometheus-server"
 
 - Open your Grafana Cloud dashboard
   - Make sure to replace yourUser
-    - <https://yourUser.grafana.net>
+    - <https://${GC_USER}.grafana.net>
 - Select the `Explore` tab from the left navigation menu
 - Select Logs data from the `Explore` drop down at top left of panel
 - Enter `{ job = "ngsa" }` in the `Loki Query`
@@ -188,6 +189,13 @@ kubectl logs -n monitoring -l app="prometheus-server"
 
 - Edit `dotnet.json` and `ngsa.json`
   - Replace `datasource` with correct data source
+
+  ```bash
+
+  envsubst '$GC_USER' < dotnet.templ > dotnet.json
+  envsubst '$GC_USER' < ngsa.templ > ngsa.json
+
+  ```
 
 - From Grafana Dashboard
   - Click + and select Import

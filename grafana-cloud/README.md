@@ -80,14 +80,18 @@ cd grafana-cloud
       - Export the value
 
       ```bash
+
       export GC_PROM_URL=pasteValue
+
       ```
 
     - Copy your `User` value
       - Export the value
 
       ```bash
+
       export GC_PROM_USER=pasteValue
+
       ```
 
 - Set Loki Tenant ID
@@ -132,7 +136,7 @@ envsubst < prometheus.yaml | kubectl apply -f -
 kubectl get pods -n monitoring
 
 # check logs
-kubectl logs -n monitoring
+kubectl logs -n monitoring -l app="prometheus-server"
 
 ```
 
@@ -146,6 +150,31 @@ kubectl logs -n monitoring
 - Enter `NgsaAppDuration_bucket` in the `PromQL Query`
 - Click `Run Query` or press `ctl + enter`
 
+## Deploy Fluent Bit
+
+  ```bash
+
+    # replace the credentials
+    envsubst < fluentbit.yaml | kubectl apply -f -
+
+    # check pod
+    kubectl get pods -n monitoring
+
+    # check logs
+    kubectl logs -n monitoring fluentbit
+
+  ```
+
+## Validate Logs
+
+- Open your Grafana Cloud dashboard
+  - Make sure to replace yourUser
+    - <https://yourUser.grafana.net>
+- Select the `Explore` tab from the left navigation menu
+- Select Logs data from the `Explore` drop down at top left of panel
+- Enter `{ job = "ngsa" }` in the `Loki Query`
+- Click `Run Query` or press `ctl + enter`
+
 ## Import Dashboards
 
 - Edit `dotnet.json` and `ngsa.json`
@@ -156,39 +185,4 @@ kubectl logs -n monitoring
   - Copy the dotnet.json text
   - Paste in `Import via panel json`
   - Click `Load`
-  - Repeat for `ngsa.json`
-
-## Deploy Fluent Bit
-
-  ```bash
-
-    kubectl apply -f fluentbit/account.yaml
-    kubectl apply -f fluentbit/log.yaml
-
-    # replace the credentials
-    envsubst < fluentbit/gcloud-config.yaml | kubectl apply -f -
-
-    kubectl apply -f fluentbit/fluentbit-pod.yaml
-
-    # check pod
-    kubectl get pods -n logging
-
-    # check logs
-    kubectl logs -n logging fluentbit
-
-  ```
-
-## Setup Prometheus
-
-```bash
-
-# change yourUserId
-export GC_PROM_USER=yourUserId
-
-# you may need to change this URL
-export GC_PROM_URL=https://prometheus-prod-10-prod-us-central-0.grafana.net
-
-# create Prometheus
-envsubst < prometheus.yaml | kubectl apply -f -
-
-```
+- Repeat for `ngsa.json`

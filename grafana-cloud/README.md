@@ -27,7 +27,7 @@
 - Click on `My Account`
   - You will get redirected to this URL <https://grafana.com/orgs/yourAccountNameHere>
 - In the left nav bar, click on `API Keys` (under Security)
-- Click on `+ Add API Key'
+- Click on `+ Add API Key`
   - Name your API Key (i.e. yourName-publisher)
   - Select `MetricsPublisher` as the role
   - Click on `Create API Key`
@@ -70,7 +70,7 @@ kubectl apply -f deploy/webv
 # create the monitoring namespace
 kubectl apply -f grafana-cloud/namespace.yaml
 
-# wit for pods to start
+# wait for pods to start
 kubectl get pods -A
 
 # change to the grafana-cloud directory
@@ -80,7 +80,7 @@ cd grafana-cloud
 
 ## Set Environment Variables
 
-- Set Prometheus values
+- Export Prometheus values
   - From the `Grafana Cloud Portal`
     - <https://grafana.com/orgs/yourUser>
   - Click `Details` in the `Prometheus` section
@@ -102,7 +102,7 @@ cd grafana-cloud
 
       ```
 
-- Set Loki Tenant ID
+- Export Loki Tenant ID
   - From the `Grafana Cloud Portal`
     - <https://grafana.com/orgs/yourUser>
   - Click `Details` in the `Loki` section

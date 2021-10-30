@@ -97,9 +97,17 @@ data:
         Name                grafana-loki
         Match               kube.var.log.containers.ngsa*.*
         Url                 https://$GC_LOKI_USER:$GC_PAT@logs-prod-us-central1.grafana.net/loki/api/v1/push
-        Labels              {job="ngsa"}
-        LabelKeys           k_app,k_namespace,Date,Category,StatusCode,Duration,Path,Region,Zone,Mode
-        RemoveKeys          Date,Category,StatusCode,Duration,Path,Region,Zone,Mode,k_app,kubernetes_namespace_name
+        Labels              {job="ngsa",app="ngsa"}
+        LabelKeys           Date,Category,StatusCode,Duration,Region,Zone,Mode
+        RemoveKeys          Date,Category,StatusCode,Duration,Region,Zone,Mode,k_app
+
+    [OUTPUT]
+        Name                grafana-loki
+        Match               kube.var.log.containers.webv*.*
+        Url                 https://$GC_LOKI_USER:$GC_PAT@logs-prod-us-central1.grafana.net/loki/api/v1/push
+        Labels              {job="ngsa",app="webv"}
+        LabelKeys           Date,Category,StatusCode,Duration,Region,Zone,Mode
+        RemoveKeys          Date,Category,StatusCode,Duration,Region,Zone,Mode,k_app
 
   input-kubernetes.conf: |
     [INPUT]

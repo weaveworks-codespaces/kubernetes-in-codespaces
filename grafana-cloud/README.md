@@ -139,16 +139,18 @@ cd grafana-cloud
 
   ```bash
 
-  echo "export GC_LOKI_USER=$GC_LOKI_USER" > ~/grafanacloud.env
-  echo "export GC_PROM_URL=$GC_PROM_URL" >> ~/grafanacloud.env
-  echo "export GC_PROM_USER=$GC_PROM_USER" >> ~/grafanacloud.env
-  echo "export GC_USER=$GC_USER" >> ~/grafanacloud.env
+  echo "export GC_LOKI_USER=$GC_LOKI_USER" > ~/.zshrc
+  echo "export GC_PROM_URL=$GC_PROM_URL" >> ~/.zshrc
+  echo "export GC_PROM_USER=$GC_PROM_USER" >> ~/.zshrc
+  echo "export GC_USER=$GC_USER" >> ~/.zshrc
 
-  cat ~/grafanacloud.env
+  cat ~/.zshrc
 
   ```
 
 ## Deploy Prometheus
+
+> Make sure you're in the grafana-cloud directory
 
 ```bash
 
@@ -197,6 +199,10 @@ kubectl logs -n monitoring -l app="prometheus-server"
 - Select Logs data from the `Explore` drop down at top left of panel
 - Enter `{ job = "ngsa" }` in the `Loki Query`
 - Click `Run Query` or press `ctl + enter`
+- Other queries
+  - `{ job = "ngsa", app = "webv" }`
+  - Filter based on a value in the json log payload
+    - `{ job = "ngsa", app = "webv", Category = "Rating100" } | json | ContentLength > 100000`
 
 ## Import Dashboards
 
@@ -207,6 +213,10 @@ kubectl logs -n monitoring -l app="prometheus-server"
 
     envsubst '$GC_USER' < dotnet.templ > dotnet.json
     envsubst '$GC_USER' < ngsa.templ > ngsa.json
+
+    # check datasources are correct
+    cat ngsa.json| grep grafanacloud
+    cat dotnet.json| grep grafanacloud
 
     ```
 

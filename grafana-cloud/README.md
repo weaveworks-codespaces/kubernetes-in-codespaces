@@ -15,15 +15,6 @@
 ## Create Grafana Cloud Account
 
 - Go to <https://grafana.com> and create a free account
-
-- Save your Grafana Cloud user name to env var
-
-  ```bash
-
-  export GC_USER=yourUserName
-
-  ```
-
 - Click on `My Account`
   - You will get redirected to this URL <https://grafana.com/orgs/yourAccountNameHere>
 - In the left nav bar, click on `API Keys` (under Security)
@@ -81,6 +72,15 @@ cd grafana-cloud
 ## Set Environment Variables
 
 - Export Prometheus values
+
+  - Export your Grafana Cloud user name
+
+    ```bash
+
+    export GC_USER=yourUserName
+
+    ```
+
   - From the `Grafana Cloud Portal`
     - <https://grafana.com/orgs/yourUser>
   - Click `Details` in the `Prometheus` section

@@ -76,7 +76,7 @@ data:
     - url: $GC_PROM_URL
       basic_auth:
         username: $GC_PROM_USER
-        password: eyJrIjoiN2U3YzRjYWVkNDU1MWEwOWM1OGRmZjUyNjRmNjAwNTk4YzJiNjNkNiIsIm4iOiJiYXJ0ci1wdWJsaXNoZXIiLCJpZCI6NTU4MzY3fQ==
+        password: $GC_PAT
     rule_files:
       - /etc/prometheus/prometheus.rules
     alerting:

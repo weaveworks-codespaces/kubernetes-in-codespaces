@@ -7,7 +7,7 @@ data:
   grafana.ini:  |
     [security]
     admin_user = admin
-    admin_password = GRAFANA_PASSWORD
+    admin_password = GRAFANA_P
 
 ---
 

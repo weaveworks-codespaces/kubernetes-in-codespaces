@@ -17,9 +17,9 @@ kind: Namespace
 metadata:
   name: heartbeat
 
----
+# ---
 
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: imdb
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: imdb

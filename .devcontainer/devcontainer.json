@@ -18,6 +18,12 @@
 		"files.insertFinalNewline": true
 	},
 
+	"containerEnv": {
+		"organization": "weaveworks-codespaces",
+		"repository": "kubernetes-in-codespaces",
+		"deploymentPath": "/deploy"
+	},
+
 	"hostRequirements": {
 		"cpus": 4
 	},

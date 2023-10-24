@@ -1,4 +1,4 @@
-# Kubernetes in Codespaces
+# DEPRECATED: Kubernetes in Codespaces
 
 > Setup a Kubernetes cluster using `k3d` running in [GitHub Codespaces](https://github.com/features/codespaces)
 
